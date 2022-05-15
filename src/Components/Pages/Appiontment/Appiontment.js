@@ -1,9 +1,10 @@
 import React from 'react';
+import AppionBanner from './AppionBanner/AppionBanner';
 
 const Appiontment = () => {
    return (
       <div>
-         <h1>Appiontmet page raning</h1>
+         <AppionBanner></AppionBanner>
       </div>
    );
 };
