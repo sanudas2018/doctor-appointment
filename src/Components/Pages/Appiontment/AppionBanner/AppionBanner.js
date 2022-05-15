@@ -1,12 +1,12 @@
-import React, { useState } from 'react';
+import React from 'react';
 import bangarImag from '../../../../assets/images/chair.png'
 import bgimg from '../../../../assets/images/bg.png'
 import { DayPicker } from 'react-day-picker';
 import 'react-day-picker/dist/style.css';
 import { format } from 'date-fns';
 
-const AppionBanner = () => {
-   const [date, setDate] = useState(new Date());
+const AppionBanner = ({date, setDate}) => {
+   // const [date, setDate] = useState(new Date());
    return (
          <div
          style={{
