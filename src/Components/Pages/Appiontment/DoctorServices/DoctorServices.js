@@ -12,7 +12,7 @@ const DoctorServices = ({service, setTreatment}) => {
                <p>{
                      slots.length > 0 
                      ? <span>{slots[0]}</span>
-                     : <span classNameName='text-red-500'>No Slot Available</span>
+                     : <span className='text-red-500'>No Slot Available</span>
                   }</p>
                <p>{slots.length} {slots.length > 1 ? 'Spaces' : 'Space'} Available</p>
                <div className='card-actions'>
@@ -20,7 +20,7 @@ const DoctorServices = ({service, setTreatment}) => {
                   <label
                    disabled={slots.length === 0} 
                    onClick={() => setTreatment(service)}
-                  for='booking-modal' 
+                  htmlFor='booking-modal' 
                   className='btn btn-primary uppercase text-white font-bold 
                   bg-gradient-to-r from-secondary to-primary'>Booking Now</label>
                </div>

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useSignInWithEmailAndPassword, useSignInWithGoogle } from 'react-firebase-hooks/auth';
 import auth from '../../../../firebase.init';
 import { useForm } from "react-hook-form";
@@ -8,6 +8,7 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 const Login = () => {
    const [signInWithGoogle, googleUser, googleLoading, googleError] = useSignInWithGoogle(auth);
    const { register, formState: { errors }, handleSubmit } = useForm();
+  
   
    const [
       signInWithEmailAndPassword,
@@ -19,7 +20,15 @@ const Login = () => {
     let navigate = useNavigate();
     let location = useLocation();
     let from = location.state?.from?.pathname || "/";
-
+   // ............error handle.......... 
+   // (Cannot update a component (`BrowserRouter`) while rendering a different component (`Login`). To locate the bad setState() call inside `Login`, follow the stack trace as described in)
+    useEffect(() => {
+      if (user || googleUser) {
+         //   console.log(user || googleUser);
+           navigate(from, { replace: true });
+          }
+   },[user, googleUser, from, navigate])
+   // ............error handle.......... 
     let signInErrorMessage;
    if (error || googleError) {
       signInErrorMessage = <p className='text-red-600'>{error?.message || googleError?.message}</p>
@@ -28,10 +37,7 @@ const Login = () => {
     if (loading || googleLoading) {
       return <Loding></Loding>;
     }
-    if (user || googleUser) {
-   //   console.log(user || googleUser);
-     navigate(from, { replace: true });
-    }
+
 
     const onSubmit = data => {
       console.log(data);
@@ -47,9 +53,9 @@ const Login = () => {
                <form onSubmit={handleSubmit(onSubmit)}>
 
              
-               <div class="form-control w-full max-w-xs">
-                  <label class="label">
-                     <span class="label-text">Email</span>
+               <div className="form-control w-full max-w-xs">
+                  <label className="label">
+                     <span className="label-text">Email</span>
                      
                   </label>
                   <input 
@@ -65,18 +71,18 @@ const Login = () => {
                   })}
                   type="email" 
                   placeholder="Your Email" 
-                  class="input input-bordered w-full max-w-xs" />
-                  <label class="label">
-                     {errors.email?.type === 'required' && <span class="label-text-alt text-red-700">{errors.email.message}</span>}
-                     {errors.email?.type === 'pattern' && <span class="label-text-alt text-red-700">{errors.email.message}
+                  className="input input-bordered w-full max-w-xs" />
+                  <label className="label">
+                     {errors.email?.type === 'required' && <span className="label-text-alt text-red-700">{errors.email.message}</span>}
+                     {errors.email?.type === 'pattern' && <span className="label-text-alt text-red-700">{errors.email.message}
                   </span>}
                      
                   </label>
                </div>
                {/* ........  */}
-               <div class="form-control w-full max-w-xs">
-                  <label class="label">
-                     <span class="label-text">Password</span>
+               <div className="form-control w-full max-w-xs">
+                  <label className="label">
+                     <span className="label-text">Password</span>
                      
                   </label>
                   <input 
@@ -92,10 +98,10 @@ const Login = () => {
                   })}
                   type="password" 
                   placeholder="Your password" 
-                  class="input input-bordered w-full max-w-xs" />
-                  <label class="label">
-                     {errors.password?.type === 'required' && <span class="label-text-alt text-red-700">{errors.password.message}</span>}
-                     {errors.password?.type === 'minLength' && <span class="label-text-alt text-red-700">{errors.password.message}
+                  className="input input-bordered w-full max-w-xs" />
+                  <label className="label">
+                     {errors.password?.type === 'required' && <span className="label-text-alt text-red-700">{errors.password.message}</span>}
+                     {errors.password?.type === 'minLength' && <span className="label-text-alt text-red-700">{errors.password.message}
                   </span>}
                      
                   </label>
