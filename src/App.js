@@ -8,6 +8,7 @@ import Reviews from './Components/Pages/Reviews/Reviews';
 import ContactUs from './Components/Pages/ContactUs/ContactUs';
 import Login from './Components/Pages/LoginAndReg/Login/Login';
 import Footer from './Components/Pages/Shared/Footer/Footer';
+import Registration from './Components/Pages/LoginAndReg/Registration/Registration';
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
         <Route path="reviews" element={<Reviews/>} />
         <Route path="contact-us" element={<ContactUs />} />
         <Route path="login" element={<Login />} />
+        <Route path="/registration" element={<Registration/>} />
       </Routes>
       <Footer></Footer>
       

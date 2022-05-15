@@ -17,7 +17,7 @@ const BookingModal = ({treatment, setTreatment, date}) => {
             <label for='booking-modal' className='btn btn-sm btn-circle absolute right-2 top-2'>✕</label>
                <h3 className='font-bold text-lg text-center text-primary mb-3'>Booking For: {name}</h3>
                
-               <form onSubmit={handleBooking} classNameName='grid grid-cols-1 gap-3 justify-items-center'>
+               <form onSubmit={handleBooking} classNameName='grid grid-cols-1 gap-3  justify-items-center '>
                <input type='text' disabled value={format(date, 'PP')} className='input input-bordered w-full max-w-xs' />
                
                <select name='slot' className='select select-bordered w-full max-w-xs'>
