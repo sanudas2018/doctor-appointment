@@ -2,33 +2,34 @@ import React from 'react';
 import { useSignInWithEmailAndPassword, useSignInWithGoogle } from 'react-firebase-hooks/auth';
 import auth from '../../../../firebase.init';
 import { useForm } from "react-hook-form";
+import Loding from '../../Shared/Loading/Loding';
 
 const Login = () => {
    const [signInWithGoogle, googleUser, googleLoading, googleError] = useSignInWithGoogle(auth);
    const { register, formState: { errors }, handleSubmit } = useForm();
   
-   // const [
-   //    signInWithEmailAndPassword,
-   //    user,
-   //    loading,
-   //    error,
-   //  ] = useSignInWithEmailAndPassword(auth);
-   // if (error) {
-   //    return (
-   //      <div>
-   //        <p>Error: {error.message}</p>
-   //      </div>
-   //    );
-   //  }
-   //  if (loading) {
-   //    return <p>Loading...</p>;
-   //  }
+   const [
+      signInWithEmailAndPassword,
+      user,
+      loading,
+      error,
+    ] = useSignInWithEmailAndPassword(auth);
+
+    let signInErrorMessage;
+   if (error || googleError) {
+      signInErrorMessage = <p className='text-red-600'>{error?.message || googleError?.message}</p>
+    }
+   //  true || loading || googleLoading
+    if (loading || googleLoading) {
+      return <Loding></Loding>;
+    }
     if (googleUser) {
      console.log(googleUser)
     }
 
     const onSubmit = data => {
       console.log(data);
+      signInWithEmailAndPassword(data.email, data.password);
    }
 
    return (
@@ -99,7 +100,7 @@ const Login = () => {
                   
                   <input {...register("lastName", { required: true })} />
                   {errors.lastName && "Last name is required"} */}
-                  
+                  {signInErrorMessage}
                   <input className='btn btn-primary uppercase text-white font-bold 
           bg-gradient-to-r from-secondary to-primary w-full max-w-xs' type="submit" value='Login' />
                </form>
@@ -107,6 +108,7 @@ const Login = () => {
                
                <div className='divider'>OR</div>
                {/* ..........Google..........  */}
+
                <button onClick={() => signInWithGoogle()} 
                className='btn btn-outline btn-warning'>Continue With Google</button>
             </div>
