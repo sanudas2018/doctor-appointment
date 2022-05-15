@@ -35,7 +35,7 @@ const Footer = () => {
             </div>
            
             </footer> 
-            <footer className='footer footer-center p-4 bg-slate-600 text-white'>
+            <footer className='footer footer-center p-4 text-white bg-slate-400'>
                <div>
                   <p>Copyright © 2022 - All right reserved</p>
                </div>
