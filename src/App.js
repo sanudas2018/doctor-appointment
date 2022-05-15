@@ -9,6 +9,7 @@ import ContactUs from './Components/Pages/ContactUs/ContactUs';
 import Login from './Components/Pages/LoginAndReg/Login/Login';
 import Footer from './Components/Pages/Shared/Footer/Footer';
 import Registration from './Components/Pages/LoginAndReg/Registration/Registration';
+import RequireAuth from './Components/Pages/LoginAndReg/RequireAuth/RequireAuth';
 
 function App() {
   return (
@@ -17,7 +18,11 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="about" element={<About />} />
-        <Route path="appiontment" element={<Appiontment />} />
+        <Route path="appiontment" element={
+          <RequireAuth>
+            <Appiontment />
+          </RequireAuth>
+        } />
         <Route path="reviews" element={<Reviews/>} />
         <Route path="contact-us" element={<ContactUs />} />
         <Route path="login" element={<Login />} />
